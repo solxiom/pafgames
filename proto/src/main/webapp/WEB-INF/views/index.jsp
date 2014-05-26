@@ -19,9 +19,9 @@
 
         <script src="<%=request.getContextPath()%>/resources/js/root.js" type="text/javascript"></script>
         <script src="<%=request.getContextPath()%>/resources/js/App.js" type="text/javascript"></script>
+        <script src="<%=request.getContextPath()%>/resources/js/Model.js" type="text/javascript"></script>
+        <script src="<%=request.getContextPath()%>/resources/js/View.js" type="text/javascript"></script>
         <script src="<%=request.getContextPath()%>/resources/js/loader.js" type="text/javascript"></script>
-        <script src="<%=request.getContextPath()%>/resources/js/init.js" type="text/javascript"></script>
-
     </head>
     <body>
         <div id="main" > 
@@ -29,18 +29,15 @@
         </div>  
          <div id="addGameDialog">
              <form>
-                 <span> Game name: <input type="text" /></span>
-                 <span> Game Link: <input type="text" /></span>
-                 <span> Game poster: <input type="text" /></span>
-                 <span> Type: <input type="text" /></span>
-                 <span> Stars: <input type="text" /></span>
+                 <span> Game name: <input id="gameName" name="name" type="text" /></span>
+                 <span> Game Link: <input id="gameLink" name="gameLink" type="text" /></span>
+                 <span> Game poster: <input id="imgLink" name="imgLink"  type="text" /></span>
+                 <span> Type: <input id="gameType"name="gameType"  type="text" /></span>
+                 <span> Stars: <input id="gameStars" name="stars" type="text" /></span>
                  <span><input type="button" value="cancel" /><input type="submit" value="add new game" /></span>
-             </form>
+             </form> 
          </div>
-        <script id="addGameTemp" type="text/template">
-           
-            
-        </script>
+      
         <script id="gameTemp" type="text/template">
             <div class="game_div">
                 <img src="{{imgLink}}" />

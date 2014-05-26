@@ -14,7 +14,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -33,6 +35,11 @@ public class GameAPIController {
     List<PafGame> findGame(HttpServletResponse response,@PathVariable("gameName") String gameName) {        
         return service.findByField("name", gameName);
     }
+    @RequestMapping(value = "/new",method = RequestMethod.POST)
+    public void addGame(HttpServletResponse response,@RequestBody PafGame game) {        
+        service.saveGame(game);
+        response.setStatus(200);
+    }
 
     @RequestMapping(value = "/list")
     public @ResponseBody
@@ -40,5 +47,11 @@ public class GameAPIController {
 
         List<PafGame> games = service.listAllGames();
         return games;
+    }
+
+   @RequestMapping(value = "/type/{typeName}")
+    public @ResponseBody
+    List<PafGame> findGamesByType(HttpServletResponse response,@PathVariable("typeName") String typeName) {        
+        return service.findByField("gameType", typeName);
     }
 }

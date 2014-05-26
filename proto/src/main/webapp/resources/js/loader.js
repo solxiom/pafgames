@@ -82,6 +82,19 @@
             $("#addGameDialog input[type='button']").click(function(){
                  $("#addGameDialog").css("display", "none");
             })
+             $("#type_nav > span").click(function() {
+            if ($(this).attr("id") === "all") {
+                $.paf.publish({key: "list_games", data: {mode: "all"}});
+            } else if ($(this).attr("id") === "casino") {
+                $.paf.publish({key: "list_games", data: {mode: "casino"}});
+            }else if ($(this).attr("id") === "slots") {
+                $.paf.publish({key: "list_games", data: {mode: "slots"}});
+            }else if ($(this).attr("id") === "lotteries") {
+                $.paf.publish({key: "list_games", data: {mode: "lotteries"}});
+            }
+            $("#type_nav > span").removeClass("choosed");
+            $(this).addClass("choosed");
+        });
         });
     };
     _loader.prototype.loadFooter = function() {
