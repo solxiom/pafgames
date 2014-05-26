@@ -22,6 +22,7 @@
 
                     $.getJSON($.paf.url.root_path + "/api/game/list", function(data) {
                         $.paf.publish({key: "update_view", data: data});
+                           $("form  input[type=text]").val("");
                     })
 
                 }

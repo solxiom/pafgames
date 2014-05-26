@@ -80,7 +80,9 @@
                 $("#addGameDialog").css("display", "inline-block");
             });
             $("#addGameDialog input[type='button']").click(function(){
+                
                  $("#addGameDialog").css("display", "none");
+                 $("form  input[type=text]").val("");
             })
              $("#type_nav > span").click(function() {
             if ($(this).attr("id") === "all") {

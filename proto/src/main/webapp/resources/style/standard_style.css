@@ -29,7 +29,7 @@ body{
     /*border: outset;*/
     width:44px;
     height:44px;
-    margin-left: 610px;
+    margin-left: 700px;
     top:20px;
     cursor: pointer;
 }
@@ -58,7 +58,7 @@ header img{
     top:-32px;
 }
 header > span:nth-of-type(2){
-    margin-left: 130px;
+    margin-left: 150px;
 }
 header div, #main, footer #logo_div{
     max-width: 1200px;
@@ -79,6 +79,7 @@ header div{
     font-size: medium;
     font-weight: normal;
     font-style: italic;
+    margin-left: 40px;
 }
 footer{
     position: absolute;

@@ -10,6 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Favourite games</title>
+        <link rel="icon" 
+      type="image/gif" 
+      href="<%=request.getContextPath()%>/resources/img/paf_icon.gif">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/style/standard_style.css" type="text/css">
         <!--Development Scripts start -->
         <!-- external -->

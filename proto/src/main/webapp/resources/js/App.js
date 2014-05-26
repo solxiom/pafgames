@@ -23,11 +23,8 @@
 
         _self.loader.loadHeader();
         $.getJSON($.paf.url.root_path + "/api/game/list", function(data) {
-//            $.each(data, function() {
-//                var result = Mustache.to_html($("#gameTemp").html(), this);
-//                $("#main").append(result);
-//            })
             $.paf.publish({key: "update_view", data: data});
+            $("#all").addClass("choosed");
         });
         window.location = $.paf.url.root_path + "/#home";
 
