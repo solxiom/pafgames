@@ -1,9 +1,9 @@
-package com.pafgames.controller;
+package com.vehicles.controller;
 
-import com.pafgames.repository.PafGameMongoRepository;
-import com.pafgames.repository.PafGameRepository;
-import com.pafgames.service.GameService;
-import com.pafgames.service.SimpleGameService;
+import com.vehicles.repository.PafGameMongoRepository;
+import com.vehicles.repository.PafGameRepository;
+import com.vehicles.service.GameService;
+import com.vehicles.service.SimpleGameService;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;

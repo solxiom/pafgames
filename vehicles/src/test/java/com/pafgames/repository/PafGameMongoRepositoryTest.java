@@ -5,7 +5,8 @@
  */
 package com.pafgames.repository;
 
-import com.pafgames.domain.entities.PafGame;
+import com.vehicles.repository.PafGameMongoRepository;
+import com.vehicles.domain.entities.PafGame;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
