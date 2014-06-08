@@ -10,6 +10,6 @@ package com.vehicles.domain.enums;
  *
  * @author kavan
  */
-public enum Color {
+public enum ColorName {
     RED, YELLOW, BLUE, BLACK, WHITE;
 }

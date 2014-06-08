@@ -7,7 +7,6 @@
 package com.vehicles.domain.entities;
 
 import com.vehicles.domain.interfaces.Vehicle;
-import com.vehicles.domain.enums.Color;
 import com.vehicles.domain.enums.RiderGender;
 import com.vehicles.domain.enums.VehicleType;
 import org.springframework.data.annotation.Id;

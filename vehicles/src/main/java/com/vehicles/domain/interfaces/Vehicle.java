@@ -6,7 +6,7 @@
 
 package com.vehicles.domain.interfaces;
 
-import com.vehicles.domain.enums.Color;
+import com.vehicles.domain.entities.Color;
 import com.vehicles.domain.enums.VehicleType;
 
 /**
