@@ -28,7 +28,7 @@ public class Boat implements Vehicle {
     private int periscopes;
 
     public Boat() {
-        this.vehicleType = VehicleType.BICYCLE;
+        this.vehicleType = VehicleType.BOAT;
         init(null, true, 0);
     }
 
@@ -89,8 +89,10 @@ public class Boat implements Vehicle {
 
     @Override
     public String toString() {
-        return super.toString() + "Boat{" + "floats=" + floats + ", periscopes=" + periscopes + '}';
+        return "Boat{" + "id=" + id + ", color=" + color + ", vehicleType=" + vehicleType + ", floats=" + floats + ", periscopes=" + periscopes + '}';
     }
+
+    
     
 
 }

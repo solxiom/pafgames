@@ -89,7 +89,7 @@ public class Car implements Vehicle {
 
     @Override
     public String toString() {
-        return super.toString() + "Car{" + "wheels=" + wheels + ", steeringWheels=" + steeringWheels + '}';
+        return "Car{"+ color + ", wheels=" + wheels + ", steeringWheels=" + steeringWheels + '}';
     }
 
 }
