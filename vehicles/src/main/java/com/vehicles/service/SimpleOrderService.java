@@ -7,6 +7,8 @@
 package com.vehicles.service;
 
 import com.vehicles.domain.entities.Order;
+import com.vehicles.exceptions.StoarageOutOfColorException;
+import com.vehicles.repository.interfaces.ColorRepository;
 import com.vehicles.repository.interfaces.OrderRepository;
 import com.vehicles.service.interfaces.OrderService;
 
@@ -16,8 +18,22 @@ import com.vehicles.service.interfaces.OrderService;
  */
 public class SimpleOrderService extends GenericServiceImpl<Order> implements OrderService{
 
-    public SimpleOrderService(OrderRepository repository) {
+    private ColorRepository colorRepo;
+    public SimpleOrderService(OrderRepository repository, ColorRepository colorRepo) {
         super(repository);
+        this.colorRepo = colorRepo;
     }
+
+    @Override
+    public void save(Order order) throws Exception, NullPointerException, StoarageOutOfColorException {
+        if(order == null || order.getVehicle() == null){
+            throw new NullPointerException("Order and order's Vehicle should not be null!");
+        }
+        if(colorRepo.findOneByField("name", order.getVehicle().getColor().toString()) == null){
+            throw new StoarageOutOfColorException(", for color " + order.getVehicle().getColor().toString());
+        }
+        super.save(order);  
+    }
+    
     
 }

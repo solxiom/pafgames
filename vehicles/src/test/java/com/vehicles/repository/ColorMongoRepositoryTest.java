@@ -55,7 +55,6 @@ public class ColorMongoRepositoryTest {
         repo.save(color);
         color = repo.findOneByField("name", ColorName.BLUE.toString());
         assertNotNull("Color Object should not be null after saving", color);
-        repo.remove(color);
     }
 
     @Test

@@ -7,11 +7,14 @@
 package com.vehicles.service.interfaces;
 
 import com.vehicles.domain.entities.Order;
+import com.vehicles.exceptions.StoarageOutOfColorException;
 
 /**
  *
  * @author kavan
  */
 public interface OrderService extends GenericService<Order> {
+    
+    
     
 }

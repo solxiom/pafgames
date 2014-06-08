@@ -21,9 +21,7 @@ import static org.junit.Assert.*;
  * @author kavan
  */
 public class OrderMongoRepositoryTest {
-
     OrderRepository repo;
-
     /**
      * Here I Use a specific TestDB and running these tests does not affect the
      * actual DB data

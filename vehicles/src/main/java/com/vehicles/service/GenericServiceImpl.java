@@ -22,23 +22,37 @@ public class GenericServiceImpl<T> implements GenericService<T> {
     public GenericServiceImpl(GenericRepository<T> repository) {
         init(repository);
     }
+
     private void init(GenericRepository<T> repository) {
         this.repository = repository;
         this.clazz = (Class<T>) GenericTypeResolver
                 .resolveTypeArgument(getClass(), GenericServiceImpl.class);
     }
+
     @Override
-    public void save(T entity) {
-        this.repository.save(entity);
+    public void save(T entity) throws Exception {
+        if (entity == null) {
+            throw new NullPointerException("Can't save null entity!");
+        } else {
+            this.repository.save(entity);
+        }
     }
+
     @Override
     public void remove(T entity) {
         this.repository.remove(entity);
     }
+
     @Override
-    public T findOneByField(String key,String value) {
+    public T findOneByField(String key, String value) {
         return this.repository.findOneByField(key, value);
     }
+
+    @Override
+    public List<T> findByField(String key, String value) {
+        return this.repository.findByField(key, value);
+    }
+
     @Override
     public List<T> findAll() {
         return this.repository.findAll();

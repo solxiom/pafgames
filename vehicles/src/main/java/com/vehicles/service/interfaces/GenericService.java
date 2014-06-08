@@ -13,12 +13,14 @@ import java.util.List;
  */
 public interface GenericService<T> {
 
-    public void save(T entity);
+    public void save(T entity) throws Exception;
 
     public void remove(T entity);
 
     public T findOneByField(String key, String value);
 
+    public List<T> findByField(String key, String value);
+
     public List<T> findAll();
-    
+
 }
