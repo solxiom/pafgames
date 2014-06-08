@@ -5,8 +5,10 @@
  */
 package com.vehicles.domain.entities;
 
+import com.vehicles.domain.enums.BicycleType;
 import com.vehicles.domain.interfaces.Vehicle;
 import com.vehicles.domain.enums.VehicleType;
+import java.util.UUID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -27,12 +29,15 @@ public class Boat implements Vehicle {
 
     public Boat() {
         this.vehicleType = VehicleType.BICYCLE;
-        this.floats = true;
-        this.periscopes = 0;
+        init(null, true, 0);
     }
 
     public Boat(Color color, boolean floats, int periscopes) {
         this();
+        init(color, floats, periscopes);
+    }
+    private void init(Color color, boolean floats, int periscopes){
+        this.id = UUID.randomUUID().toString();
         this.color = color;
         this.floats = floats;
         this.periscopes = periscopes;

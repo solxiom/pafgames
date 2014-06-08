@@ -2,6 +2,7 @@
 
 package com.vehicles.domain.entities;
 
+import com.vehicles.domain.enums.ColorName;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,17 +13,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Color {
     @Id
-    private com.vehicles.domain.enums.ColorName name;
+    private ColorName name;
 
-    public Color(com.vehicles.domain.enums.ColorName name) {
+    public Color(ColorName name) {
         this.name = name;
     }
 
-    public com.vehicles.domain.enums.ColorName getName() {
+    public ColorName getName() {
         return name;
     }
 
-    public void setName(com.vehicles.domain.enums.ColorName name) {
+    public void setName(ColorName name) {
         this.name = name;
     }
 

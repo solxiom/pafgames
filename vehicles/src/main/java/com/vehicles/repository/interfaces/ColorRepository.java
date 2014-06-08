@@ -6,7 +6,6 @@
 
 package com.vehicles.repository.interfaces;
 
-import com.vehicles.repository.interfaces.GenericRepository;
 import com.vehicles.domain.entities.Color;
 
 /**

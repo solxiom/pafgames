@@ -7,6 +7,7 @@ package com.vehicles.domain.entities;
 
 import com.vehicles.domain.interfaces.Vehicle;
 import com.vehicles.domain.enums.VehicleType;
+import java.util.UUID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -26,23 +27,25 @@ public class Car implements Vehicle {
     private int steeringWheels;
 
     public Car() {
+        init(null,0,0);
         this.vehicleType = VehicleType.CAR;
     }
-
     public Car(Color color, int wheels, int steeringWheels) {
-        this();
-        this.color = color;
-        this.wheels = wheels;
-        this.steeringWheels = steeringWheels;
-    }
+        init(color,wheels,steeringWheels);
+        this.vehicleType = VehicleType.CAR;
 
+    }
     public Car(Color color, int wheels, int steeringWheels, VehicleType type) {
+        init(color,wheels,steeringWheels);
         this.vehicleType = type;
+
+    }
+    private void init(Color color, int wheels, int steeringWheels) {
+        this.id = UUID.randomUUID().toString();
         this.color = color;
         this.wheels = wheels;
         this.steeringWheels = steeringWheels;
     }
-
     @Override
     public String getId() {
         return id;

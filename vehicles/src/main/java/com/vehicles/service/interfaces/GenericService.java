@@ -5,7 +5,6 @@
  */
 package com.vehicles.service.interfaces;
 
-import com.vehicles.repository.interfaces.GenericRepository;
 import java.util.List;
 
 /**

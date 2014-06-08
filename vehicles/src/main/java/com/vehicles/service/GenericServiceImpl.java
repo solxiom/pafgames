@@ -22,36 +22,25 @@ public class GenericServiceImpl<T> implements GenericService<T> {
     public GenericServiceImpl(GenericRepository<T> repository) {
         init(repository);
     }
-
     private void init(GenericRepository<T> repository) {
         this.repository = repository;
         this.clazz = (Class<T>) GenericTypeResolver
                 .resolveTypeArgument(getClass(), GenericServiceImpl.class);
     }
-
     @Override
     public void save(T entity) {
         this.repository.save(entity);
     }
-
     @Override
     public void remove(T entity) {
         this.repository.remove(entity);
     }
-
     @Override
     public T findOneByField(String key,String value) {
         return this.repository.findOneByField(key, value);
     }
-
     @Override
     public List<T> findAll() {
         return this.repository.findAll();
     }
-
-//    @Override
-//    public GenericRepository<T> getRepository() {
-//        return this.repository;
-//    }
-
 }

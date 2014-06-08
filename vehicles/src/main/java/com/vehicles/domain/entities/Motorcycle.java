@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.vehicles.domain.entities;
 
 import com.vehicles.domain.interfaces.Vehicle;
 import com.vehicles.domain.enums.RiderGender;
 import com.vehicles.domain.enums.VehicleType;
+import java.util.UUID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,19 +23,25 @@ public class Motorcycle implements Vehicle {
     private String id;
     private Color color;
     private final VehicleType vehicleType;
-    
+
     private RiderGender riderGender;
-    
+
     public Motorcycle() {
         this.vehicleType = VehicleType.MOTORCYCLE;
+        init(null, null);
     }
 
     public Motorcycle(Color color, RiderGender riderGender) {
         this();
+        init(color, riderGender);
+    }
+
+    private void init(Color color, RiderGender riderGender) {
+        this.id = UUID.randomUUID().toString();
         this.color = color;
         this.riderGender = riderGender;
     }
- 
+
     @Override
     public String getId() {
         return id;
@@ -59,8 +65,8 @@ public class Motorcycle implements Vehicle {
     @Override
     public VehicleType getVehicleType() {
         return vehicleType;
-    }   
-    
+    }
+
     public RiderGender getRiderGender() {
         return riderGender;
     }
@@ -73,6 +79,5 @@ public class Motorcycle implements Vehicle {
     public String toString() {
         return super.toString() + "Motorcycle{" + "riderGender=" + riderGender + '}';
     }
-    
-    
+
 }

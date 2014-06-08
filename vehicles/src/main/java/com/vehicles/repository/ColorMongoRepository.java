@@ -14,5 +14,11 @@ import com.vehicles.domain.entities.Color;
  * @author kavan
  */
 public class ColorMongoRepository extends GenericMongoRepository<Color> implements ColorRepository{
-    
+
+    public ColorMongoRepository() {
+    }
+
+    public ColorMongoRepository(Class mongoConfigClass) {
+        super(mongoConfigClass);
+    }
 }

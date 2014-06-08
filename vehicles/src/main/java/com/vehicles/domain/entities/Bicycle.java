@@ -8,6 +8,7 @@ package com.vehicles.domain.entities;
 import com.vehicles.domain.interfaces.Vehicle;
 import com.vehicles.domain.enums.BicycleType;
 import com.vehicles.domain.enums.VehicleType;
+import java.util.UUID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -26,10 +27,15 @@ public class Bicycle implements Vehicle{
 
     public Bicycle() {
        this.vehicleType = VehicleType.BICYCLE;
+       init(null,null);
     }
 
     public Bicycle(BicycleType bicycleType, Color color) {
         this();
+        init(bicycleType,color);
+    }
+    private void init(BicycleType bicycleType, Color color){
+        this.id = UUID.randomUUID().toString();
         this.bicycleType = bicycleType;
         this.color = color;
     }

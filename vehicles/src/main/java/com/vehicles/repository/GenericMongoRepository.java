@@ -26,11 +26,14 @@ public class GenericMongoRepository<T> implements GenericRepository<T> {
     Class<T> clazz;
 
     public GenericMongoRepository() {
-        init();
+        init(SpringMongoConfig.class);
     }
 
-    private void init() {
-        ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+    public GenericMongoRepository(Class mongoConfigClass) {
+        init(mongoConfigClass);
+    }
+    private void init(Class config) {
+        ctx = new AnnotationConfigApplicationContext(config);
         mongoTemplate = (MongoTemplate) ctx.getBean("mongoTemplate");
         this.clazz = (Class<T>) GenericTypeResolver
                 .resolveTypeArgument(getClass(), GenericMongoRepository.class);

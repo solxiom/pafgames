@@ -6,7 +6,6 @@
 
 package com.vehicles.service.interfaces;
 
-import com.vehicles.service.interfaces.GenericService;
 import com.vehicles.domain.entities.Order;
 
 /**

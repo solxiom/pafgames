@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.vehicles.domain.entities;
 
 import com.vehicles.domain.interfaces.Vehicle;
+import java.util.UUID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,9 +16,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 public class Order {
+
     @Id
     private String id;
     private Vehicle vehicle;
+
+    public Order() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public Order(Vehicle vehicle) {
+        this();
+        this.vehicle = vehicle;
+    }
 
     public String getId() {
         return id;
@@ -40,5 +50,5 @@ public class Order {
     public String toString() {
         return "Order{" + "id=" + id + ", vehicle=" + vehicle.toString() + '}';
     }
-    
+
 }
