@@ -7,7 +7,9 @@
 package com.vehicles.service.interfaces;
 
 import com.vehicles.domain.entities.Order;
+import com.vehicles.domain.interfaces.Vehicle;
 import com.vehicles.exceptions.StoarageOutOfColorException;
+import java.util.List;
 
 /**
  *
@@ -15,6 +17,8 @@ import com.vehicles.exceptions.StoarageOutOfColorException;
  */
 public interface OrderService extends GenericService<Order> {
     
-    
+    public List<Order> findByVehicle(Vehicle vehicle);
+
+    public Order findOneByVehicle(Vehicle vehicle);
     
 }

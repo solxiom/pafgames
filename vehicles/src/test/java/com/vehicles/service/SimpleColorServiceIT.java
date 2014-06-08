@@ -25,6 +25,7 @@ public class SimpleColorServiceIT {
 
     ColorRepository repo;
     ColorService service;
+
     /**
      * Here I Use a specific TestDB and running these tests does not affect the
      * actual DB data
@@ -33,6 +34,7 @@ public class SimpleColorServiceIT {
         repo = new ColorMongoRepository(SpringMongoTestConfig.class);
         service = new SimpleColorService(repo);
     }
+
     /**
      * I make sure TestDB is empty before each test
      */
@@ -43,9 +45,11 @@ public class SimpleColorServiceIT {
             repo.remove(cl);
         }
     }
+
     @After
     public void tearDown() {
     }
+
     /**
      *
      */
@@ -55,13 +59,22 @@ public class SimpleColorServiceIT {
         color = repo.findOneByField("name", ColorName.BLUE.toString());
         assertNull("Color Object should be null before saving", color);
         color = new Color(ColorName.BLUE);
-        service.save(color);
+        try {
+            service.save(color);
+        } catch (Exception e) {
+            fail("Exception in testSave method " + e.getMessage());
+        }
         color = repo.findOneByField("name", ColorName.BLUE.toString());
         assertNotNull("Color Object should not be null after saving", color);
         color = new Color(ColorName.BLUE);
-        service.save(color);
+        try {
+            service.save(color);
+        } catch (Exception e) {
+            fail("Exception in testSave method " + e.getMessage());
+        }
         assertTrue("same color should not be added two time in database", repo.findByField("name", ColorName.BLUE.toString()).size() == 1);
     }
+
     /**
      *
      */
@@ -71,7 +84,11 @@ public class SimpleColorServiceIT {
         color = repo.findOneByField("name", ColorName.BLUE.toString());
         assertNull("Color Object should be null before saving", color);
         color = new Color(ColorName.BLUE);
-        service.save(color);
+        try {
+            service.save(color);
+        } catch (Exception e) {
+            fail("Exception in testSave method " + e.getMessage());
+        }
         color = repo.findOneByField("name", ColorName.BLUE.toString());
         assertNotNull("Color Object should not be null after saving", color);
         service.remove(color);
@@ -92,6 +109,7 @@ public class SimpleColorServiceIT {
         assertTrue("DB size now should be equal to " + ColorName.values().length
                 + " but it's " + size, size == ColorName.values().length);
     }
+
     /**
      *
      */
@@ -121,6 +139,7 @@ public class SimpleColorServiceIT {
         assertNull("Color Object should be removed from DB after popColor operation", repo.findOneByField("name", ColorName.BLUE.toString()));
         assertTrue("popColor should return correct color object", popColor.getName() == ColorName.BLUE);
     }
+
     /**
      * Test of isColorExists method, of class SimpleColorService.
      */
@@ -136,6 +155,7 @@ public class SimpleColorServiceIT {
         repo.remove(color);
         assertFalse("operation must return false in this stage", service.isColorExists(ColorName.BLUE));
     }
+
     /**
      * Test of refillMissedColors method, of class SimpleColorService.
      */
