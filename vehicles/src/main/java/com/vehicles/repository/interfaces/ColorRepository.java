@@ -4,17 +4,15 @@
  * and open the template in the editor.
  */
 
-package com.vehicles.repository;
+package com.vehicles.repository.interfaces;
 
 import com.vehicles.repository.interfaces.GenericRepository;
-import com.vehicles.domain.entities.PafGame;
-import org.springframework.stereotype.Repository;
+import com.vehicles.domain.entities.Color;
 
 /**
  *
  * @author kavan
  */
-@Repository
-public interface PafGameRepository extends GenericRepository<PafGame> {
+public interface ColorRepository extends GenericRepository<Color>{
     
 }

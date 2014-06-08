@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.vehicles.service;
+package com.vehicles.service.interfaces;
 
 import com.vehicles.domain.entities.PafGame;
 import java.util.List;

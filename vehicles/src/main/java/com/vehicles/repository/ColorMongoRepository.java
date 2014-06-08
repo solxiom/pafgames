@@ -6,15 +6,13 @@
 
 package com.vehicles.repository;
 
-import com.vehicles.repository.interfaces.GenericRepository;
-import com.vehicles.domain.entities.PafGame;
-import org.springframework.stereotype.Repository;
+import com.vehicles.repository.interfaces.ColorRepository;
+import com.vehicles.domain.entities.Color;
 
 /**
  *
  * @author kavan
  */
-@Repository
-public interface PafGameRepository extends GenericRepository<PafGame> {
+public class ColorMongoRepository extends GenericMongoRepository<Color> implements ColorRepository{
     
 }

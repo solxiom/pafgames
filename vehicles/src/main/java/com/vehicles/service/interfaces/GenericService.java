@@ -3,18 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package com.vehicles.repository;
+package com.vehicles.service.interfaces;
 
 import com.vehicles.repository.interfaces.GenericRepository;
-import com.vehicles.domain.entities.PafGame;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 /**
  *
  * @author kavan
  */
-@Repository
-public interface PafGameRepository extends GenericRepository<PafGame> {
+public interface GenericService<T> {
+
+    public void save(T entity);
+
+    public void remove(T entity);
+
+    public T findOneByField(String key, String value);
+
+    public List<T> findAll();
     
 }

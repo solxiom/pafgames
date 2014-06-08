@@ -5,10 +5,10 @@
  */
 package com.vehicles.service;
 
+import com.vehicles.service.interfaces.GameService;
 import com.vehicles.domain.entities.PafGame;
 import com.vehicles.repository.PafGameRepository;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 /**
  *

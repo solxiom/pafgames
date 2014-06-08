@@ -2,7 +2,7 @@ package com.vehicles.controller;
 
 import com.vehicles.repository.PafGameMongoRepository;
 import com.vehicles.repository.PafGameRepository;
-import com.vehicles.service.GameService;
+import com.vehicles.service.interfaces.GameService;
 import com.vehicles.service.SimpleGameService;
 import java.io.IOException;
 

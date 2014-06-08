@@ -4,6 +4,7 @@
  */
 package com.vehicles.repository;
 
+import com.vehicles.repository.interfaces.GenericRepository;
 import com.vehicles.config.SpringMongoConfig;
 import java.util.List;
 import org.springframework.context.ApplicationContext;
@@ -43,8 +44,8 @@ public class GenericMongoRepository<T> implements GenericRepository<T> {
     }
 
     @Override
-    public List<T> findByField(String field, String value) {
-        Query query = new Query(Criteria.where(field).is(value));
+    public List<T> findByField(String key, String value) {
+        Query query = new Query(Criteria.where(key).is(value));
         List<T> result = (List<T>) mongoTemplate.find(query, clazz);
         return result;
     }

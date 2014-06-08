@@ -6,15 +6,13 @@
 
 package com.vehicles.repository;
 
-import com.vehicles.repository.interfaces.GenericRepository;
-import com.vehicles.domain.entities.PafGame;
-import org.springframework.stereotype.Repository;
+import com.vehicles.repository.interfaces.OrderRepository;
+import com.vehicles.domain.entities.Order;
 
 /**
  *
  * @author kavan
  */
-@Repository
-public interface PafGameRepository extends GenericRepository<PafGame> {
+public class OrderMongoRepository extends GenericMongoRepository<Order> implements OrderRepository {
     
 }
