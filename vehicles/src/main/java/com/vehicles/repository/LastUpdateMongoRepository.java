@@ -6,15 +6,14 @@
 
 package com.vehicles.repository;
 
-import com.vehicles.repository.interfaces.GenericRepository;
-import com.vehicles.domain.entities.PafGame;
-import org.springframework.stereotype.Repository;
+import com.vehicles.domain.enums.LastUpdate;
+import com.vehicles.repository.interfaces.LastUpdateRepository;
 
 /**
  *
  * @author kavan
  */
-@Repository
-public interface PafGameRepository extends GenericRepository<PafGame> {
+public class LastUpdateMongoRepository extends
+        GenericMongoRepository<LastUpdate> implements LastUpdateRepository {
     
 }

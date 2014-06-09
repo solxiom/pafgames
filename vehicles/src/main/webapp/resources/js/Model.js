@@ -8,7 +8,38 @@
     var _model = CoderLeopard.pafGames.Model = function() {
         'use strict';
         var _self = this;
+        $.paf.subscribe("start_worker", function() {
+            /**
+             * firs ask from server if any DB updates is occured and
+             * request the DB data only if server has somthing new to offer
+             */
+            $.ajax({
+                url: '/api/lastupdate',
+                success: function(data) {
+                    var localUpdateInfo = null;
+                    try {
+                        localUpdateInfo = JSON.parse(sessionStorage.getItem("localUpdateInfo"));
+                    } catch (e) {
+                        localUpdateInfo = null;
+                    }
+                    if (localUpdateInfo === null || localUpdateInfo !== data.date) {
+//                        console.log(localUpdateInfo);
+//                        console.log("server has new info!!...");
+                        console.log(new Date());
+                        sessionStorage.setItem("localUpdateInfo", data.date);
+                        $.paf.publish({key: "orders_request", data: undefined});
+                        $.paf.publish({key: "colors_request", data: undefined});
+                    }
 
+                },
+                complete: function() {
+                    // Schedule the next request when the current one's complete
+                    setTimeout(function() {
+                        $.paf.publish({key: "start_worker", data: undefined});
+                    }, 2000);
+                }
+            });
+        });
         $.paf.subscribe("save_order", function(order) {
             $.ajax({
                 type: "POST",
@@ -17,16 +48,14 @@
                 dataType: "json",
                 async: true,
                 contentType: 'application/json; charset=utf-8',
+                success: function(data) {
+                    $.paf.publish({key: "colors_request", data: undefined});
+                    $.paf.publish({key: "orders_request", data: undefined});
+                },
                 complete: function(msg) {
                     if (msg.status >= 400) {
                         $.paf.publish({key: "show_notification", data: "Bad Command Request! Server rejected your Command"});
 
-                    } else {
-                        $.getJSON($.paf.url.root_path + "/api/order/list", function(data) {
-                            $.paf.publish({key: "colors_request", data: undefined});
-                            $.paf.publish({key: "orders_request", data: undefined});
-                            //to be continued....
-                        })
                     }
                 }
             });
@@ -54,37 +83,7 @@
                 }
             });
         });
-        $.paf.subscribe("new_game", function(game) {
 
-            $.ajax({
-                type: "POST",
-                url: $.paf.url.root_path + "/api/game/new",
-                data: JSON.stringify(game),
-                dataType: "json",
-                async: true,
-                contentType: 'application/json; charset=utf-8',
-                complete: function(msg) {
-
-                    $.getJSON($.paf.url.root_path + "/api/game/list", function(data) {
-                        $.paf.publish({key: "update_view", data: data});
-                        $("form  input[type=text]").val("");
-                    })
-
-                }
-            });
-        });
-        $.paf.subscribe("list_games", function(params) {
-            var url;
-            if (params.mode === "all") {
-                url = $.paf.url.root_path + "/api/game/list";
-            } else {
-                url = $.paf.url.root_path + "/api/game/type/" + params.mode;
-            }
-            $.getJSON(url, function(data) {
-                $.paf.publish({key: "update_view", data: data});
-            })
-
-        })
     }
 
 

@@ -3,16 +3,22 @@ package com.vehicles.controller;
 import com.vehicles.domain.CommandRequest;
 import com.vehicles.domain.entities.Color;
 import com.vehicles.domain.entities.Order;
+import com.vehicles.domain.enums.LastUpdate;
 import com.vehicles.exceptions.BadCommandException;
 import com.vehicles.exceptions.StoarageOutOfColorException;
 import com.vehicles.repository.ColorMongoRepository;
+import com.vehicles.repository.LastUpdateMongoRepository;
 import com.vehicles.repository.OrderMongoRepository;
 import com.vehicles.repository.interfaces.ColorRepository;
+import com.vehicles.repository.interfaces.LastUpdateRepository;
 import com.vehicles.repository.interfaces.OrderRepository;
 import com.vehicles.service.SimpleColorService;
+import com.vehicles.service.SimpleLastUpdateService;
 import com.vehicles.service.SimpleOrderService;
 import com.vehicles.service.interfaces.ColorService;
+import com.vehicles.service.interfaces.LastUpdateService;
 import com.vehicles.service.interfaces.OrderService;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -31,10 +37,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api")
 public class VehiclesAPIController {
 
+    private final String updateDBKey = "paf_interview_proto_1234567";
     private final Logger logger = Logger.getLogger(getClass().getName());
     CommandUtil util = new CommandUtil();
+
+    LastUpdateRepository updateRepo = new LastUpdateMongoRepository();
     OrderRepository orderRepo = new OrderMongoRepository();
     ColorRepository colorRepo = new ColorMongoRepository();
+
+    LastUpdateService updateService = new SimpleLastUpdateService(updateRepo);
     ColorService colorService = new SimpleColorService(colorRepo);
     OrderService orderService = new SimpleOrderService(orderRepo, colorService);
 
@@ -50,6 +61,8 @@ public class VehiclesAPIController {
         }
         try {
             orderService.save(order);
+            updateService.save(new LastUpdate(updateDBKey, new Date()));
+
         } catch (StoarageOutOfColorException ex) {
             response.setStatus(403);//"Forbidden"
             logger.info("new Order: StoarageOutOfColor Exception occured!");
@@ -61,6 +74,13 @@ public class VehiclesAPIController {
             return;
         }
         response.setStatus(200);
+    }
+
+    @RequestMapping(value = "/lastupdate", method = RequestMethod.GET)
+    public @ResponseBody
+    LastUpdate getLastDBUpdateTime() {
+        logger.info("returning last update time");
+        return updateService.findOneByField("id", updateDBKey);
     }
 
     @RequestMapping(value = "/order/list", method = RequestMethod.GET)
@@ -86,6 +106,12 @@ public class VehiclesAPIController {
     public void refillColors(HttpServletResponse response) {
         logger.info("refilling colors...");
         colorService.refillMissedColors();
+        try {
+            updateService.save(new LastUpdate(updateDBKey, new Date()));
+        } catch (Exception e) {
+            logger.info("saving update time failed!");
+
+        }
         response.setStatus(200);
     }
 

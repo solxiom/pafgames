@@ -55,11 +55,7 @@ body{
     width:60px;
     height: 40px;
 }
-.coloredSpan{
-    width: 20px;
-    height:20px;
 
-}
 .order_item{
     background: beige;
     border-radius: 15px;
@@ -82,10 +78,11 @@ header{
 
 }
 #refillBT{    
-    width: 50px;
+    width: 80px;
     height:30px;
     margin-left:20px;
     border-radius: 5px;
+    font-weight: 600;
     font-size: large;
 }
 #commandBT{
@@ -151,14 +148,14 @@ header div{
 }
 #main #orders{    
     position: absolute;
-    width: 600px;
+    width: 730px;
 
 }
 #main #colors{    
     border-radius: 15px;
     box-shadow: 10px 10px 5px #888888;
     background: #c2ccd1;
-    width:250px;
+    width:270px;
     height:400px;
     position:fixed;
     left:65%;
@@ -170,7 +167,7 @@ header div{
     white-space: nowrap;
     display: inline-block;
     font-size: large;
-    font-style: oblique;
+    /*font-style: oblique;*/
 }
 #colors > .inner > span{    
     white-space: nowrap;
