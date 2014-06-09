@@ -6,11 +6,14 @@
 package com.vehicles.service;
 
 import com.vehicles.domain.entities.Order;
+import com.vehicles.domain.enums.LastUpdate;
 import com.vehicles.domain.interfaces.Vehicle;
 import com.vehicles.exceptions.StoarageOutOfColorException;
 import com.vehicles.repository.interfaces.OrderRepository;
 import com.vehicles.service.interfaces.ColorService;
+import com.vehicles.service.interfaces.LastUpdateService;
 import com.vehicles.service.interfaces.OrderService;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,11 +24,17 @@ import java.util.List;
 public class SimpleOrderService extends GenericServiceImpl<Order> implements OrderService {
 
     private ColorService colorService;
+    private LastUpdateService updateService;
+    private final String updateKey;
 
-    public SimpleOrderService(OrderRepository repository, ColorService colorService) {
+    public SimpleOrderService(OrderRepository repository, 
+            ColorService colorService, 
+            LastUpdateService updateService, String updateKey) {
 
         super(repository);
         this.colorService = colorService;
+        this.updateService = updateService;
+        this.updateKey = updateKey;
     }
 
     @Override
@@ -38,6 +47,7 @@ public class SimpleOrderService extends GenericServiceImpl<Order> implements Ord
         }
         super.save(order);
         colorService.popColor(order.getVehicle().getColor().getName());
+        updateService.save(new LastUpdate(updateKey, new Date()));
     }
 
     @Override

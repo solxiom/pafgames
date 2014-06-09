@@ -46,8 +46,8 @@ public class VehiclesAPIController {
     ColorRepository colorRepo = new ColorMongoRepository();
 
     LastUpdateService updateService = new SimpleLastUpdateService(updateRepo);
-    ColorService colorService = new SimpleColorService(colorRepo);
-    OrderService orderService = new SimpleOrderService(orderRepo, colorService);
+    ColorService colorService = new SimpleColorService(colorRepo,updateService,updateDBKey);
+    OrderService orderService = new SimpleOrderService(orderRepo, colorService, updateService,updateDBKey);
 
     @RequestMapping(value = "/order/new", method = RequestMethod.POST)
     public void addOrder(HttpServletResponse response, @RequestBody CommandRequest command) {
@@ -61,8 +61,6 @@ public class VehiclesAPIController {
         }
         try {
             orderService.save(order);
-            updateService.save(new LastUpdate(updateDBKey, new Date()));
-
         } catch (StoarageOutOfColorException ex) {
             response.setStatus(403);//"Forbidden"
             logger.info("new Order: StoarageOutOfColor Exception occured!");
@@ -106,12 +104,6 @@ public class VehiclesAPIController {
     public void refillColors(HttpServletResponse response) {
         logger.info("refilling colors...");
         colorService.refillMissedColors();
-        try {
-            updateService.save(new LastUpdate(updateDBKey, new Date()));
-        } catch (Exception e) {
-            logger.info("saving update time failed!");
-
-        }
         response.setStatus(200);
     }
 

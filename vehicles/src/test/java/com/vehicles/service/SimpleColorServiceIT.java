@@ -9,8 +9,10 @@ import com.vehicles.config.SpringMongoTestConfig;
 import com.vehicles.domain.entities.Color;
 import com.vehicles.domain.enums.ColorName;
 import com.vehicles.repository.ColorMongoRepository;
+import com.vehicles.repository.LastUpdateMongoRepository;
 import com.vehicles.repository.interfaces.ColorRepository;
 import com.vehicles.service.interfaces.ColorService;
+import com.vehicles.service.interfaces.LastUpdateService;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
@@ -25,6 +27,8 @@ public class SimpleColorServiceIT {
 
     ColorRepository repo;
     ColorService service;
+    LastUpdateService updateService;
+    private final String dbUpdateKey = "test_db_updateKey";
 
     /**
      * Here I Use a specific TestDB and running these tests does not affect the
@@ -32,7 +36,8 @@ public class SimpleColorServiceIT {
      */
     public SimpleColorServiceIT() {
         repo = new ColorMongoRepository(SpringMongoTestConfig.class);
-        service = new SimpleColorService(repo);
+        updateService = new SimpleLastUpdateService(new LastUpdateMongoRepository());
+        service = new SimpleColorService(repo,updateService,dbUpdateKey);
     }
 
     /**

@@ -13,10 +13,12 @@ import com.vehicles.domain.enums.ColorName;
 import com.vehicles.domain.interfaces.Vehicle;
 import com.vehicles.exceptions.StoarageOutOfColorException;
 import com.vehicles.repository.ColorMongoRepository;
+import com.vehicles.repository.LastUpdateMongoRepository;
 import com.vehicles.repository.OrderMongoRepository;
 import com.vehicles.repository.interfaces.ColorRepository;
 import com.vehicles.repository.interfaces.OrderRepository;
 import com.vehicles.service.interfaces.ColorService;
+import com.vehicles.service.interfaces.LastUpdateService;
 import com.vehicles.service.interfaces.OrderService;
 import java.util.List;
 import org.junit.After;
@@ -38,6 +40,8 @@ public class SimpleOrderServiceIT {
     OrderRepository orderRepo;
     ColorService colorService;
     ColorRepository colorRepo;
+    LastUpdateService updateService;
+    private final String dbUpdateKey = "test_db_updateKey";
 
     /**
      * Here I Use a specific TestDB and running these tests does not affect the
@@ -46,8 +50,10 @@ public class SimpleOrderServiceIT {
     public SimpleOrderServiceIT() {
         orderRepo = new OrderMongoRepository(SpringMongoTestConfig.class);
         colorRepo = new ColorMongoRepository(SpringMongoTestConfig.class);
-        colorService = new SimpleColorService(colorRepo);
-        orderService = new SimpleOrderService(orderRepo, colorService);
+        updateService = new SimpleLastUpdateService(new LastUpdateMongoRepository());
+
+        colorService = new SimpleColorService(colorRepo, updateService, dbUpdateKey);
+        orderService = new SimpleOrderService(orderRepo, colorService,updateService, dbUpdateKey);
     }
 
     /**
@@ -201,7 +207,7 @@ public class SimpleOrderServiceIT {
 
     @Test
     public void testFindOneByVehicle_whenVehicleIsNull() {
-        
+
         assertNull("service should return Null! ", orderService.findOneByVehicle(null));
     }
 

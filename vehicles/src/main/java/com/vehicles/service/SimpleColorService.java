@@ -8,7 +8,10 @@ package com.vehicles.service;
 import com.vehicles.service.interfaces.ColorService;
 import com.vehicles.domain.entities.Color;
 import com.vehicles.domain.enums.ColorName;
+import com.vehicles.domain.enums.LastUpdate;
 import com.vehicles.repository.interfaces.ColorRepository;
+import com.vehicles.service.interfaces.LastUpdateService;
+import java.util.Date;
 
 /**
  *
@@ -16,12 +19,18 @@ import com.vehicles.repository.interfaces.ColorRepository;
  */
 public class SimpleColorService extends GenericServiceImpl<Color> implements ColorService {
 
-    public SimpleColorService(ColorRepository repository) {
+    private LastUpdateService updateService;
+    private final String updateKey;
+
+    public SimpleColorService(ColorRepository repository,
+            LastUpdateService updateService, String updateKey ) {
         super(repository);
+        this.updateService = updateService;
+        this.updateKey = updateKey;
     }
 
     @Override
-    public void save(Color color) throws Exception{
+    public void save(Color color) throws Exception {
         if (repository.findOneByField("name", color.getName().toString()) == null) {
             super.save(color);
         }
@@ -43,9 +52,18 @@ public class SimpleColorService extends GenericServiceImpl<Color> implements Col
 
     @Override
     public void refillMissedColors() {
+        boolean updated = false;
         for (ColorName cn : ColorName.values()) {
             if (isColorEmpty(cn)) {
                 repository.save(new Color(cn));
+                updated = true;
+            }
+        }
+        if(updated){
+            try{
+                updateService.save(new LastUpdate(updateKey, new Date()));
+            }catch(Exception e){
+                
             }
         }
     }
