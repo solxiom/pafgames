@@ -31,7 +31,8 @@
         'use strict';
         var _self = this;
         //public interface
-        _self.root_path = location.protocol + "//" + location.host + "/vehicles";
+//        _self.root_path = location.protocol + "//" + location.host + "/vehicles";
+        _self.root_path = location.protocol + "//" + location.host;
         if (typeof window.CoderLeopard.pafGames === "undefined") {
             window.CoderLeopard.pafGames = {};
         }

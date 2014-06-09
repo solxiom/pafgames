@@ -23,6 +23,16 @@ body{
     margin-bottom: 200px;
     color:black;
 }
+.coolTag{
+    background: #ffcaca;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    float:right;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    margin-top: 10px;
+}
 .notification{
     margin-left:700px;
     width: 400px;

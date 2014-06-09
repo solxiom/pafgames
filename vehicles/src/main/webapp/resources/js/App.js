@@ -25,7 +25,7 @@
         });
         $.paf.publish({key:"colors_request",data:undefined});
         $.paf.publish({key:"orders_request",data:undefined});
-        window.location = $.paf.url.root_path + "/#home";
+        window.location = $.paf.url.root_path + "/#vehicles";
 
     }
     $("document").ready(function() {

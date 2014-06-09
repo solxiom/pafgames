@@ -52,7 +52,7 @@
                 var result = "";
                 if (this.vehicle.vehicleType.toString().toLowerCase() === "ferrari") {
                     this.vehicle.img = $.paf.url.root_path + "/resources/img/car/ferrari.png";
-                    result = Mustache.to_html($("#carTemp").html(), this.vehicle);
+                    result = Mustache.to_html($("#ferrariTemp").html(), this.vehicle);
                 } else if (this.vehicle.vehicleType.toString().toLowerCase() === "car") {
                     this.vehicle.img = $.paf.url.root_path + "/resources/img/car/" + this.vehicle.color.name.toString().toLowerCase() + "_car.png";
                     result = Mustache.to_html($("#carTemp").html(), this.vehicle);
@@ -60,6 +60,12 @@
                 } else if (this.vehicle.vehicleType.toString().toLowerCase() === "motorcycle") {
 
                     this.vehicle.img = $.paf.url.root_path + "/resources/img/bike/" + this.vehicle.riderGender.toLowerCase() + ".png";
+                    if(this.vehicle.riderGender.toLowerCase() === "female"){
+                        this.vehicle.riderGender = this.vehicle.riderGender +" a.k.a Chick";
+                    }else{
+                        this.vehicle.riderGender = this.vehicle.riderGender+" a.k.a Dude ";
+;
+                    }
                     result = Mustache.to_html($("#motorTemp").html(), this.vehicle);
 
                 } else if (this.vehicle.vehicleType.toString().toLowerCase() === "bicycle") {

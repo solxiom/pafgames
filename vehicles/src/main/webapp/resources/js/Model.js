@@ -18,7 +18,7 @@
                 async: true,
                 contentType: 'application/json; charset=utf-8',
                 complete: function(msg) {
-                    if (msg.status !== 200 || msg.status !== 202 || msg.status !== 201) {
+                    if (msg.status >= 400) {
                         $.paf.publish({key: "show_notification", data: "Bad Command Request! Server rejected your Command"});
 
                     } else {

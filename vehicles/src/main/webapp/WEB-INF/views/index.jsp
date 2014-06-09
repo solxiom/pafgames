@@ -29,7 +29,7 @@
         <header>
             <div id="header_title">
                 <span> Vehicles "R" Them</span>
-                <img src="/vehicles/resources/img/paf_log.png"/>
+                <img src="<%=request.getContextPath()%>/resources/img/paf_log.png"/>
                 <div id="commandDiv">
                     <form>
                         <input id="commandTxt" name="command" type="text">
@@ -67,6 +67,19 @@
                 <span>wheels: {{wheels}}</span>
                 <span>Steering wheels: {{steeringWheels}}
                 </span>
+        </div>
+
+    </script>
+    <script id="ferrariTemp" type="text/template">
+                <div class="order_item car_order">  
+                <image style='width:90px;height60px;' src={{img}} />
+              <span>{{vehicleType}}</span>
+                <span>Color:</span>
+                 <span style="color:{{color.name}}"> {{color.name}} </span> 
+                <span>wheels: {{wheels}}</span>
+                <span>Steering wheels: {{steeringWheels}}
+                </span>
+                <span class='coolTag'> COOL OBJECT!</span>
         </div>
 
     </script>
