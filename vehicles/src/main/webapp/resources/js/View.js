@@ -8,15 +8,6 @@
     var _view = CoderLeopard.pafGames.View = function() {
         'use strict';
         var _self = this;
-        $("#addGameDialog form").on("submit", function(event) {
-            event.preventDefault();
-            $.paf.publish({key: "new_game", data: {name: $("#gameName").val(),
-                    imgLink: $("#imgLink").val(),
-                    playLink: $("#playLink").val(),
-                    gameType: $("#gameType").val(),
-                    stars: $("#gameStars").val()}
-            });
-        });
         $("#commandDiv form").on("submit", function(event) {
             event.preventDefault();
             $.paf.publish({key: "save_order", data: {date: new Date(),
@@ -26,6 +17,7 @@
         $("#refillBT").click(function() {
             $.paf.publish({key: "refill_request", data: undefined});
         });
+        //
         $.paf.subscribe("update_view", function(data) {
             $("#main").empty();
             $.each(data, function() {
@@ -46,6 +38,10 @@
             $(".notification").css("display","block");
             $(".notification #notifText").html(data);
         })
+        $.paf.subscribe("clear_command", function(){
+            $("#commandTxt").val("");
+            $("#commandTxt").val("");
+        });
         $.paf.subscribe("update_orders", function(data) {
             $("#orders .inner").empty();
             $.each(data, function() {

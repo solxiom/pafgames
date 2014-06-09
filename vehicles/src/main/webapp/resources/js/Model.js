@@ -23,8 +23,6 @@
                         localUpdateInfo = null;
                     }
                     if (localUpdateInfo === null || localUpdateInfo !== data.date) {
-//                        console.log(localUpdateInfo);
-//                        console.log("server has new info!!...");
                         console.log(new Date());
                         sessionStorage.setItem("localUpdateInfo", data.date);
                         $.paf.publish({key: "orders_request", data: undefined});
@@ -48,14 +46,14 @@
                 dataType: "json",
                 async: true,
                 contentType: 'application/json; charset=utf-8',
-                success: function(data) {
-                    $.paf.publish({key: "colors_request", data: undefined});
-                    $.paf.publish({key: "orders_request", data: undefined});
-                },
                 complete: function(msg) {
                     if (msg.status >= 400) {
                         $.paf.publish({key: "show_notification", data: "Bad Command Request! Server rejected your Command"});
 
+                    } else {
+                        $.paf.publish({key: "colors_request", data: undefined});
+                        $.paf.publish({key: "orders_request", data: undefined});
+                        $.paf.publish({key: "clear_command", data: undefined});
                     }
                 }
             });
