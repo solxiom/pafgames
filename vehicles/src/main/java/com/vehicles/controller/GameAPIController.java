@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author kavan
  */
 @Controller
-@RequestMapping("/api/game")
+@RequestMapping("/api2/game")
 public class GameAPIController {
 
     PafGameRepository repo = new PafGameMongoRepository();

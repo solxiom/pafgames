@@ -20,8 +20,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		return resolver;
-	}
-	
+	}	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
